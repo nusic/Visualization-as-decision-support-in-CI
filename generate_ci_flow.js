@@ -7,8 +7,8 @@
 
 var graphlib = require("graphlib");
 
-var CINodeFactory = require('./CINodeFactory.js').CINodeFactory;
-var Graph = require('./CIGraph.js').Graph;
+var CINodeFactory = require('./src/CINodeFactory.js').CINodeFactory;
+var Graph = require('./src/CIGraph.js').Graph;
 
 var g = new Graph();
 g.nodeFactory = new CINodeFactory();
