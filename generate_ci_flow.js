@@ -5,21 +5,33 @@
  *
  */
 
+var fs = require('fs');
 var graphlib = require("graphlib");
+var dot = require('graphlib-dot');
 
-var CINodeFactory = require('./src/CINodeFactory.js').CINodeFactory;
-var Graph = require('./src/CIGraph.js').Graph;
-
-var g = new Graph();
-g.nodeFactory = new CINodeFactory();
+var CIGraphFactory = require('./src/CIGraphFactory.js').CIGraphFactory;
 
 
-g.set('code_change') // 0
-	.cause(['patch_verification', 'review']) // 1, 2
-		.set('build').causedBy([1, 2]) // 3
-			.cause(['test', 'test', 'artifact']) // 4, 5, 6
-				.set('confidence_level').causedBy([4, 5]).subjectTo(6) // 7
-					.cause(['test', 'test']) // 8, 9
+// Create graph
+var ciGraphFactory = new CIGraphFactory();
+var g = ciGraphFactory.create(10, 0.7);
 
 
-console.log(graphlib.json.write(g));
+// Output graph
+var writer = (process.argv.indexOf('--json') !== -1) ? graphlib.json : dot;
+var specifiedFile = process.argv.indexOf('-file')+1;
+
+
+var graphStr = writer.write(g);
+
+if(specifiedFile){
+	var fileName = process.argv[specifiedFile];
+	
+	fs.writeFile(fileName, graphStr, function (err) { 
+		if(err) return console.error(err);
+		console.log('saved to ' + fileName);
+	});
+}
+else if (process.argv.indexOf('--none') === -1){
+	console.log(graphStr);
+}
