@@ -6,7 +6,7 @@ window.onload = function() {
   var decorator = new Decorator(); 
 
   $.ajax({
-    url: "data/test_multi.dot"
+    url: "data/test1.dot"
   }).done(function (data) {
     
     var $graphContainer = $('#graph-container');

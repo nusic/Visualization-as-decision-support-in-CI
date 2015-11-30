@@ -68,12 +68,29 @@ Decorator.prototype.build = function(node){
 
 }
 
+Decorator.prototype.test_A = function(node){
+	this.test(node);
+}
+
+Decorator.prototype.test_B = function(node){
+	this.test(node);
+}
+
+Decorator.prototype.test_C = function(node){
+	this.test(node);
+}
+
+Decorator.prototype.test_D = function(node){
+	this.test(node);
+}
+
 Decorator.prototype.test = function(node){
 
 }
 
 Decorator.prototype.artifact = function(node){
 	node.shape = 'circle';
+	node.style += 'fill: #aaf;'; 
 }
 
 Decorator.prototype.confidence_level = function(node){
