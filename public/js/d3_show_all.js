@@ -1,8 +1,6 @@
 window.onload = function() {
 
   var renderer = new dagreD3.render();
-
-
   var decorator = new Decorator(); 
 
   $.ajax({
@@ -11,11 +9,14 @@ window.onload = function() {
     
     var $graphContainer = $('#graph-container');
     var graphs = graphlibDot.readMany(data);
+    console.log(graphs[0]);
     graphs.forEach(function (g, index){
+
+      //Print out the text representation of the graph for debugging
+      document.getElementById('graph-text').innerHTML += graphlibDot.write(g).replace(/\n/g, ' ').replace(/]/g, ']<br />') + '<br />';
 
       //Add graphical properties to graph
       decorator.decorate(g);
-
 
       //Create SVG and render in it
       g.id = 'graph' + index;
@@ -26,9 +27,6 @@ window.onload = function() {
       g.graph().nodesep = 15;
 
       render(g);
-
-      //Print out the text representation of the graph for debugging
-      document.getElementById('graph-text').innerHTML += graphlibDot.write(g).replace(/\n/g, ' ').replace(/]/g, ']<br />') + '<br />';
     });
     
   });

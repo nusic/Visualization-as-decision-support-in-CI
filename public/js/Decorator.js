@@ -31,8 +31,8 @@ Decorator.prototype.addDateToLabel = function(node) {
 };
 
 Decorator.prototype.colorCodePassFail = function(node) {
-	if(node.passed === 'true') node.style += 'fill: #afa;';
-	if(node.passed === 'false') node.style += 'fill: #faa;';
+	if(node.status === 'passed') node.style += 'fill: #afa;';
+	if(node.status === 'failed') node.style += 'fill: #faa;';
 };
 
 Decorator.prototype.decorateNode = function(node) {

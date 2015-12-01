@@ -68,7 +68,7 @@ function CIPatchVerification(masterFactory, type) {
 
 CIPatchVerification.prototype.create = function () {
 	var node = this.masterFactory.createBaseNode(this);
-	node.data.passed = Math.random() < this.passProbability;
+	node.data.status = Math.random() < this.passProbability ? 'passed' : 'failed';
 	return node;
 }
 
@@ -96,7 +96,7 @@ function CICodeReviewFactory(masterFactory, type) {
 CICodeReviewFactory.prototype.create = function() {
 	var node = this.masterFactory.createBaseNode(this);
 	node.data.reviewer = this.masterFactory.getPerson();
-	node.data.passed = Math.random() < this.passProbability;
+	node.data.status = Math.random() < this.passProbability ? 'passed' : 'failed';
 	return node;
 };
 
@@ -111,7 +111,7 @@ function CIBuildFactory(masterFactory, type) {
 
 CIBuildFactory.prototype.create = function() {
 	var node = this.masterFactory.createBaseNode(this);
-	node.data.passed = Math.random() < this.passProbability;
+	node.data.status = Math.random() < this.passProbability ? 'passed' : 'failed';
 	return node;
 };
 
@@ -125,7 +125,7 @@ function CITestFactory(masterFactory, type) {
 
 CITestFactory.prototype.create = function() {
 	var node = this.masterFactory.createBaseNode(this);
-	node.data.passed = Math.random() < this.passProbability;
+	node.data.status = Math.random() < this.passProbability ? 'passed' : 'failed';
 	return node;
 };
 
