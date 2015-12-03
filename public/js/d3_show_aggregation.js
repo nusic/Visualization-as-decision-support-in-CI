@@ -18,8 +18,6 @@ window.onload = function() {
     var minVal = 0;
     var maxVal = graphs.length;
 
-    updateTimeIntervalLabel(graphs, minVal, maxVal);
-
     $("#slider-range").slider({
         range: true,
         min: minVal,
@@ -29,24 +27,23 @@ window.onload = function() {
         slide: function (e, ui) {
           var start = ui.values[0];
           var end = ui.values[1];
-
-          updateTimeIntervalLabel(graphs, start, end);
-
-
           var selectedGraphs = graphs.slice(start, end);
-          var d0 = (new Date).getTime();
+
+          updateTimeIntervalLabel(selectedGraphs);
           render(selectedGraphs);
-          console.log('render time: ' + ((new Date).getTime() - d0) + 'ms');
         }
     });
 
+    updateTimeIntervalLabel(graphs);
     render(graphs);
 
   });
 
-  function updateTimeIntervalLabel(graphs, start, end){
-    var startDate = getStartTime(graphs[start]);
-    var endDate = getStartTime(graphs[end-1]);
+  function updateTimeIntervalLabel(selectedGraphs){
+    var firstGraph = selectedGraphs[0];
+    var lastGraph = selectedGraphs[selectedGraphs.length-1];
+    var startDate = getStartTime(firstGraph);
+    var endDate = getStartTime(lastGraph);
     var startDateStr = startDate.toDateAndTimeStr();
     var endDateStr = endDate.toDateAndTimeStr();
     $('.slider-time').html(startDateStr);
