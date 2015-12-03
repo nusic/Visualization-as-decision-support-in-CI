@@ -4,7 +4,7 @@ function createSlider(minTime, maxTime){
         range: true,
         min: minTime,
         max: maxTime,
-        step: 60,
+        step: 1,
         values: [minTime, maxTime],
         slide: function (e, ui) {
             var hours1 = Math.floor(ui.values[0] / 60);

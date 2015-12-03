@@ -30,11 +30,12 @@ AggregatedGraphDecorator.prototype.colorCodePassFail = function(node) {
 AggregatedGraphDecorator.prototype.decorateNode = function(node) {
 	node.label = '';
 	node.style = '';
+	node.width = 130;
 
 	// applies to node types: patch_verification, code_review, build and test
 	this.addTypeToLabel(node);
-	this.colorCodePassFail(node);
-
+	node.label += ' (' + node.count + '/' + this.numAggregatedGraphs + ')';
+	//node.label += ' (' + node.maxNodeIndex + ')'
 
 	this[node.type](node);
 };
@@ -44,7 +45,6 @@ AggregatedGraphDecorator.prototype.decorateNode = function(node) {
 
 AggregatedGraphDecorator.prototype.code_change = function(node){
 	node.shape = 'circle';
-	node.label += '\ncount: ' + node.count;
 }
 
 AggregatedGraphDecorator.prototype.code_review = function(node){
@@ -76,7 +76,7 @@ AggregatedGraphDecorator.prototype.test_D = function(node){
 }
 
 AggregatedGraphDecorator.prototype.passable = function(node){
-	node.label += '\n ' + node.passed + '/' + (node.passed + node.failed);
+	node.label += '\npassed: ' + node.passed + '/' + (node.passed + node.failed);
 	var passRatio = node.passed / (node.passed + node.failed);
 
 	var passColor = {r: 0, g: 255, b: 0};
@@ -92,13 +92,11 @@ AggregatedGraphDecorator.prototype.passable = function(node){
 AggregatedGraphDecorator.prototype.artifact = function(node){
 	node.shape = 'circle';
 	node.style += 'fill: #aaf;';
-	node.label += '\ncount: ' + node.count;
 }
 
 AggregatedGraphDecorator.prototype.confidence_level = function(node){
 	node.shape = 'circle';
-	node.label += '\ncount: ' + node.count;
-	node.label += '\nvalue: ' + (node.sumValue / node.count).toFixed(2);
+	node.label += '\nAvg value: ' + (node.sumValue / node.count).toFixed(2);
 	
 	var avgValue = node.sumValue / node.count;
 

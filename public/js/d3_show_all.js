@@ -4,12 +4,11 @@ window.onload = function() {
   var decorator = new Decorator(); 
 
   $.ajax({
-    url: "data/test1.dot"
+    url: "data/test2.dot"
   }).done(function (data) {
-    
     var $graphContainer = $('#graph-container');
     var graphs = graphlibDot.readMany(data);
-    console.log(graphs[0]);
+
     graphs.forEach(function (g, index){
 
       //Print out the text representation of the graph for debugging
@@ -28,7 +27,6 @@ window.onload = function() {
 
       render(g);
     });
-    
   });
 
 
