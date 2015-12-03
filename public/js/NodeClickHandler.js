@@ -67,6 +67,8 @@ NodeClickHandler.prototype.handlerFunction = function(nodeName) {
 	var nodeDataArray = this.getDataFor(nodeName);
 	var method = this.map[nodeName];
 	this[method](nodeDataArray);
+
+	this.element.textContent = JSON.stringify(nodeDataArray);
 };
 
 NodeClickHandler.prototype.code_change = function(nodeDataArray) {

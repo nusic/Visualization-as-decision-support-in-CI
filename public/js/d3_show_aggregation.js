@@ -4,7 +4,7 @@ window.onload = function() {
   var aggregator = new Aggregator();
 
   var decorator = new AggregatedGraphDecorator();
-  var nodeClickHandler = new NodeClickHandler();
+  var nodeClickHandler = new NodeClickHandler($('#event-timeline')[0]);
     
 
   $.ajax({
@@ -15,10 +15,10 @@ window.onload = function() {
     var $graphContainer = $('#graph-container');
     var graphs = graphlibDot.readMany(data);
     
-
-    //createSlider(0, 1440);
     var minVal = 0;
     var maxVal = graphs.length;
+
+    updateTimeIntervalLabel(graphs, minVal, maxVal);
 
     $("#slider-range").slider({
         range: true,
@@ -30,18 +30,28 @@ window.onload = function() {
           var start = ui.values[0];
           var end = ui.values[1];
 
-          var startDate = getStartTime(graphs[start]);
-          var endDate = getStartTime(graphs[end-1]);
-          $('.slider-time').html(startDate);
-          $('.slider-time2').html(endDate);
+          updateTimeIntervalLabel(graphs, start, end);
+
 
           var selectedGraphs = graphs.slice(start, end);
+          var d0 = (new Date).getTime();
           render(selectedGraphs);
+          console.log('render time: ' + ((new Date).getTime() - d0) + 'ms');
         }
     });
+
     render(graphs);
+
   });
 
+  function updateTimeIntervalLabel(graphs, start, end){
+    var startDate = getStartTime(graphs[start]);
+    var endDate = getStartTime(graphs[end-1]);
+    var startDateStr = startDate.toDateAndTimeStr();
+    var endDateStr = endDate.toDateAndTimeStr();
+    $('.slider-time').html(startDateStr);
+    $('.slider-time2').html(endDateStr);
+  }
 
   function getStartTime(g){
     var codeChangeName = g.nodes()[0];

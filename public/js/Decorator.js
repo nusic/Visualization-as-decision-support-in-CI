@@ -26,8 +26,7 @@ Decorator.prototype.addTimeToLabel = function(node) {
 
 Decorator.prototype.addDateToLabel = function(node) {
 	var d = new Date(Number(node.time));
-	var dateStr = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
-	node.label += '\n' + dateStr;
+	node.label += '\n' + d.toDateStr();
 };
 
 Decorator.prototype.colorCodePassFail = function(node) {

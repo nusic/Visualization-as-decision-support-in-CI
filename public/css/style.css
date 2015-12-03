@@ -8,6 +8,10 @@ text {
 	font-size: 14px;
 }
 
+g.node{
+  cursor: pointer;
+}
+
 .node rect, .node ellipse, .node diamond, .node circle{
   stroke: #333;
   stroke-width: 1.5px;

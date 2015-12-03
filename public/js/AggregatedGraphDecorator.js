@@ -83,7 +83,7 @@ AggregatedGraphDecorator.prototype.passable = function(node){
 	var c = this.interpolateColors(failColor, passColor, passRatio);
 
 	var executionRatio = node.count / this.numAggregatedGraphs;
-	var alpha = Math.pow(executionRatio, 4);
+	var alpha = Math.pow(executionRatio, 1);
 
 	node.style = 'fill: rgba('+ c.r + ',' + c.g + ',' + c.b + ','+ alpha +');';
 }
@@ -104,7 +104,7 @@ AggregatedGraphDecorator.prototype.confidence_level = function(node){
 	var c = this.interpolateColors(failColor, passColor, avgValue);
 
 	var executionRatio = node.count / this.numAggregatedGraphs;
-	var alpha = Math.pow(executionRatio, 4);
+	var alpha = Math.pow(executionRatio, 1);
 
 	node.style = 'fill: rgba('+ c.r + ',' + c.g + ',' + c.b + ','+ alpha +');';
 }
