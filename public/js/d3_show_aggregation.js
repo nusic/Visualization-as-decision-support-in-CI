@@ -4,6 +4,8 @@ window.onload = function() {
   var aggregator = new Aggregator();
 
   var decorator = new AggregatedGraphDecorator();
+  var nodeClickHandler = new NodeClickHandler();
+    
 
   $.ajax({
     //url: "data/test1.dot"
@@ -62,11 +64,19 @@ window.onload = function() {
 
     renderer(inner, g);
 
-    // Optional - resize the SVG element based on the contents.
+
+
+    // Resize the SVG element based on the contents.
     var svg = document.querySelector('#graph-svg');
     var bbox = svg.getBBox();
     svg.style.width = bbox.width + 40.0 + "px";
     svg.style.height = bbox.height + 40.0 + "px";
+
+    //Add click listener
+    nodeClickHandler.setGraphs(graphs);
+    inner.selectAll('g.node').on('click', function (nodeName){
+      nodeClickHandler.handlerFunction(nodeName);
+    });
   }
  
 }

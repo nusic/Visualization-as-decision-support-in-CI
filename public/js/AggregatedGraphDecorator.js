@@ -30,7 +30,6 @@ AggregatedGraphDecorator.prototype.colorCodePassFail = function(node) {
 AggregatedGraphDecorator.prototype.decorateNode = function(node) {
 	node.label = '';
 	node.style = '';
-	node.width = 130;
 
 	// applies to node types: patch_verification, code_review, build and test
 	this.addTypeToLabel(node);
