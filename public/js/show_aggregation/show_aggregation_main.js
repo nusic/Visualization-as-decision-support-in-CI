@@ -4,12 +4,12 @@ window.onload = function() {
   var aggregator = new Aggregator();
 
   var decorator = new AggregatedGraphDecorator();
-  var nodeClickHandler = new NodeClickHandler($('#event-timeline')[0]);
+  var nodeClickHandler = new NodeClickHandler( $('#event-timeline')[0] );
     
 
   $.ajax({
-    //url: "data/test1.dot"
-    url: "data/test2.dot"
+    url: "data/test1.dot"
+    //url: "data/test2.dot"
   }).done(function (data) {
     
     var $graphContainer = $('#graph-container');
@@ -25,6 +25,7 @@ window.onload = function() {
         step: 1,
         values: [minVal, maxVal],
         slide: function (e, ui) {
+          $('#timeline1').empty();
           var start = ui.values[0];
           var end = ui.values[1];
           var selectedGraphs = graphs.slice(start, end);
