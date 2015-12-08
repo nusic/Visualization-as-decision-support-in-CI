@@ -4,30 +4,34 @@ window.onload = function() {
   var decorator = new Decorator(); 
 
   $.ajax({
-    url: "data/test2.dot"
+    url: "data/test100_M_to_1.dot"
   }).done(function (data) {
+
     var $graphContainer = $('#graph-container');
+    $graphContainer.empty();
     var graphs = graphlibDot.readMany(data);
 
     graphs.forEach(function (g, index){
 
-      //Print out the text representation of the graph for debugging
-      document.getElementById('graph-text').innerHTML += graphlibDot.write(g).replace(/\n/g, ' ').replace(/]/g, ']<br />') + '<br />';
+      setTimeout(function(){
 
-      //Add graphical properties to graph
-      decorator.decorate(g);
+        //Print out the text representation of the graph for debugging
+        //document.getElementById('graph-text').innerHTML += graphlibDot.write(g).replace(/\n/g, ' ').replace(/]/g, ']<br />') + '<br />';
 
-      //Create SVG and render in it
-      g.id = 'graph' + index;
-      $graphContainer.append( '<svg id="'+ g.id +'"><g></svg>' );
+        //Add graphical properties to graph
+        decorator.decorate(g);
 
-      g.graph().rankdir = "RL";
-      g.graph().ranksep = 30;
-      g.graph().nodesep = 15;
+        //Create SVG and render in it
+        g.id = 'graph' + index;
+        $graphContainer.append( '<svg id="'+ g.id +'"><g></svg>' );
 
-      render(g);
+        g.graph().rankdir = "RL";
+        g.graph().ranksep = 30;
+        g.graph().nodesep = 15;
+
+        render(g);
+      }, 20*index);
     });
-
   });
 
 

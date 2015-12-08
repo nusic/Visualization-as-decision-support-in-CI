@@ -1,6 +1,9 @@
 svg {
   overflow: hidden;
+  display: block;
 }
+
+
 
 text {
 	font-weight: 300;
@@ -14,7 +17,7 @@ g.node{
 
 .node rect, .node ellipse, .node diamond, .node circle{
   stroke: #333;
-  stroke-width: 1.5px;
+  stroke-width: 2px;
   fill: #fff;
 }
 
