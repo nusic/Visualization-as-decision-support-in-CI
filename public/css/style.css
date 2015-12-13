@@ -3,7 +3,10 @@ svg {
   display: block;
 }
 
-
+#search-field{
+  margin: 20px;
+  margin-left: 0px;
+}
 
 text {
 	font-weight: 300;
