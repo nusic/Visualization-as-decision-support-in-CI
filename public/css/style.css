@@ -34,6 +34,9 @@ g.node{
   stroke-width: 1.5px;
 }
 
+.edge-invisible{
+  stroke-width: 0px;
+}
 
 #graph-text{
 	font-family: monospace;
@@ -41,4 +44,12 @@ g.node{
 
 .timelineSeries_passed{
   fill: #f99;
+}
+
+.indirect{
+  cursor: pointer;
+}
+
+.edge-message{
+  position: relative;
 }

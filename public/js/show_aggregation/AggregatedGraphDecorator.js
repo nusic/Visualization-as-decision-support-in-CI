@@ -5,12 +5,19 @@ var AggregatedGraphDecorator = function(){
 }
 
 AggregatedGraphDecorator.prototype.decorate = function(g){
+
 	this.numAggregatedGraphs = g.numAggregatedGraphs;
 	var thisDecorator = this;
+
 	g.nodes().forEach(function (id){
-    	var node = g.node(id);
+		var node = g.node(id);
 		thisDecorator.decorateNode(node);
 	});
+
+	g.graph().rankdir = "RL";
+	g.graph().ranksep = 30;
+	g.graph().nodesep = 15;
+
 	this.numAggregatedGraphs = null;
 }
 

@@ -57,3 +57,9 @@ Graph.prototype.getDeveloper = function() {
 	var codeChangeData = this.node(codeChangeId);
 	return codeChangeData.contributor;
 };
+
+Graph.prototype.getCodeChange = function() {
+	var codeChangeId = this.nodes()[0];
+	var codeChangeData = this.node(codeChangeId);
+	return codeChangeData;
+};

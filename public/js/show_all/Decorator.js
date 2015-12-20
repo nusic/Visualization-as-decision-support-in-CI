@@ -5,11 +5,24 @@ var Decorator = function(){
 }
 
 Decorator.prototype.decorate = function(g){
+
 	var thisDecorator = this;
-	g.nodes().forEach(function (id){
-    	var node = g.node(id);
+
+	g.nodes().forEach(function (nodeId){
+		var node = g.node(nodeId);
 		thisDecorator.decorateNode(node);
 	});
+
+	g.edges().forEach(function (edgeId){
+		var edge = g.edge(edgeId);
+		var srcNode = g.node(edgeId.v);
+		var dstNode = g.node(edgeId.w);
+		thisDecorator.decorateEdge(edge, srcNode, dstNode);
+	});
+
+	g.graph().rankdir = "RL";
+	g.graph().ranksep = 30;
+	g.graph().nodesep = 15;
 }
 
 Decorator.prototype.addTypeToLabel = function(node) {
@@ -33,6 +46,9 @@ Decorator.prototype.colorCodePassFail = function(node) {
 	if(node.status === 'failed') node.style += 'fill: #faa;';
 };
 
+
+
+
 Decorator.prototype.decorateNode = function(node) {
 	node.label = '';
 	node.style = '';
@@ -45,11 +61,35 @@ Decorator.prototype.decorateNode = function(node) {
 	this[node.type](node);
 };
 
+Decorator.prototype.decorateEdge = function(edge, srcNode, dstNode) {
+	edge.style = '';
+	//console.log(srcNode.graphIndex + '->' + dstNode.graphIndex);
+
+	if(srcNode.graphIndex !== dstNode.graphIndex){
+		edge.labelStyle = 'font-style: italic;'
+
+		if(srcNode.graphIndex < dstNode.graphIndex){
+			edge.style += 'stroke: none; fill: none; stroke-dasharray: 5, 5;';
+			//edge.label = edge.label[0] === '(' ? edge.label : '(' + edge.label + ')';
+			edge.label = '';
+			edge.class = 'edge-invisible';
+		}
+		else{
+			edge.style += 'stroke: #00f; fill: transparent; stroke-dasharray: 5, 5;';
+			//edge.label = edge.label[0] === '(' ? edge.label : '(' + edge.label + ')';
+			edge.label = 'indirect';
+			edge.class = 'indirect';
+		}
+		//console.log(srcNode.graphIndex, '->', dstNode.graphIndex);
+	}
+};
+
 
 
 
 Decorator.prototype.code_change = function(node){
 	node.shape = 'circle';
+	node.label += '\n#' + node.id;
 	node.label += '\n(' + node.contributor + ')';
 }
 

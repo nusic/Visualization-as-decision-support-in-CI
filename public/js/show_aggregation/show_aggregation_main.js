@@ -61,10 +61,6 @@ window.onload = function() {
     var g = aggregator.unionOf(graphs);
     decorator.decorate(g);
 
-    g.graph().rankdir = "RL";
-    g.graph().ranksep = 30;
-    g.graph().nodesep = 15;
-
     // Render the graphlib object using d3.
     var svg = d3.select('#graph-svg'),
         inner = svg.select("g");
