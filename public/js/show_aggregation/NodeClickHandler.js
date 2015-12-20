@@ -73,16 +73,15 @@ NodeClickHandler.prototype.handlerFunction = function(nodeName) {
 };
 
 NodeClickHandler.prototype.code_change = function(nodeDataArray) {
-	console.log('handler: code_change');
+
 };
 
 NodeClickHandler.prototype.code_review = function(nodeDataArray) {
 	this.passable(nodeDataArray);
-	console.log('handler: code_review');
 };
 
 NodeClickHandler.prototype.passable = function(nodeDataArray) {
-	console.log('handler: passable');
+
 	var firstTime = nodeDataArray[0].time;
 	var lastTime = nodeDataArray[nodeDataArray.length -1].time;
 
@@ -121,10 +120,10 @@ NodeClickHandler.prototype.passable = function(nodeDataArray) {
 };
 
 NodeClickHandler.prototype.artifact = function(nodeDataArray) {
-	console.log('handler: artifact');
+
 };
 
 NodeClickHandler.prototype.confidence_level = function(nodeDataArray) {
-	console.log('handler: confidence_level');
+
 };
 

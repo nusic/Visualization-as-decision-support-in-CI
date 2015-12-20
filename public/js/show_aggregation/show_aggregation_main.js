@@ -39,7 +39,6 @@ window.onload = function() {
   });
 
   function update(selectedGraphs){
-    selectedNode = selectedNode || 'code_change';
     updateTimeIntervalLabel(selectedGraphs);
     render(selectedGraphs);
     nodeClickHandler.handlerFunction(selectedNode);
@@ -65,7 +64,8 @@ window.onload = function() {
 
   function render(graphs) {
     var g = aggregator.unionOf(graphs);
-    decorator.decorate(g);
+    selectedNode = selectedNode || Graph.prototype.getFirstWith.apply(g, ['passed']);
+    decorator.decorate(g, selectedNode);
 
     // Render the graphlib object using d3.
     var svg = d3.select('#graph-svg'),
@@ -83,6 +83,8 @@ window.onload = function() {
     nodeClickHandler.setGraphs(graphs);
     inner.selectAll('g.node').on('click', function (nodeName){
       selectedNode = nodeName;
+      decorator.decorate(g, selectedNode);
+      renderer(inner, g);
       nodeClickHandler.handlerFunction(nodeName);
     });
   }

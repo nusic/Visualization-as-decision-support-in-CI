@@ -63,3 +63,19 @@ Graph.prototype.getCodeChange = function() {
 	var codeChangeData = this.node(codeChangeId);
 	return codeChangeData;
 };
+
+Graph.prototype.getFirstWith = function(property, value) {
+	var nodes = this.nodes()
+	for (var i = 0; i < nodes.length; i++) {
+		var nodeData = this.node(nodes[i]);
+		if(value !== undefined){
+			if(nodeData[property] === value){
+				return nodes[i];
+			}
+		}
+		else if(nodeData[property]){
+			return nodes[i];
+		}
+	};
+	return null;
+};

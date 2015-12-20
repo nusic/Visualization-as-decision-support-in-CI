@@ -1,6 +1,6 @@
  
 var Aggregator = function(){
-	
+
 }
 
 Aggregator.prototype.aggregationMethodMap = {
@@ -32,16 +32,16 @@ Aggregator.prototype.unionOf = function(graphs, aggregationMethod){
 			nodeData.nodeIndex = j;
 			nodeData.id = nodeName;
 
-
 			// If aggregationMethod was provided as argument, use that,
 			// else use aggregation method based on node type
+
 			var nodeAggregationMethod = aggregationMethod || this.aggregationMethodMap[nodeData.type];
 			try{
 				this[nodeAggregationMethod](unionNodeMap, nodeData);
 			}
 			catch(e){
 				console.error(e);
-				console.log(nodeData.type)
+				console.log(nodeAggregationMethod);
 			}
 		};
 	}
