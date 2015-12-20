@@ -1,7 +1,7 @@
 
 
-var NodeClickHandler = function (element) {
-	this.element = element;
+var NodeClickHandler = function () {
+
 }
 
 NodeClickHandler.prototype.setGraphs = function(graphs) {
@@ -68,8 +68,6 @@ NodeClickHandler.prototype.handlerFunction = function(nodeName) {
 	var nodeDataArray = this.getDataFor(nodeName);
 	var method = this.map[nodeName];
 	this[method](nodeDataArray);
-
-	//this.element.textContent = JSON.stringify(nodeDataArray);
 };
 
 NodeClickHandler.prototype.code_change = function(nodeDataArray) {
@@ -98,24 +96,23 @@ NodeClickHandler.prototype.passable = function(nodeDataArray) {
 		});
 	};
 
-
 	var chart = d3.timeline()
           .tickFormat( //
             {format: d3.time.format("%Y-%m-%d"),
-            tickTime: d3.time.days,
+            tickTime: d3.time.hours,
             tickInterval: nodeDataArray.length,
-            tickSize: 5})
+            tickSize: 2})
           .display("circle"); // toggle between rectangles and circles
-   
-    var svg = d3.select("#timeline1").append("svg").attr("width", 1000)
+
+    var svg = d3.select("#timeline1").append("svg").attr("width", window.innerWidth)
           .datum(timelineData).call(chart);
 
     d3.selectAll('circle.timelineSeries_passed')[0].forEach(function(e){
-    	e.style.fill = 'rgba(0, 255, 0, 0.3)';
+    	e.style.fill = 'rgba(0, 255, 0, 0.2)';
     });
 
     d3.selectAll('circle.timelineSeries_failed')[0].forEach(function(e){
-    	e.style.fill = 'rgba(255, 0, 0, 0.3)';
+    	e.style.fill = 'rgba(255, 0, 0, 0.2)';
     });
 };
 

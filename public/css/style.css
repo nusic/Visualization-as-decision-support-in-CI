@@ -53,3 +53,7 @@ g.node{
 .edge-message{
   position: relative;
 }
+
+#timeline1{
+  margin-bottom: 50px;
+}
