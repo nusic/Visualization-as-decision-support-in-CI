@@ -1,6 +1,6 @@
  
 var Aggregator = function(){
-
+	
 }
 
 Aggregator.prototype.aggregationMethodMap = {

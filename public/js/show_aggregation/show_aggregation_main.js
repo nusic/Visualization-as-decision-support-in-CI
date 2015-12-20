@@ -4,7 +4,8 @@ window.onload = function() {
   var aggregator = new Aggregator();
 
   var decorator = new AggregatedGraphDecorator();
-  var nodeClickHandler = new NodeClickHandler( $('#event-timeline')[0] );  
+  var nodeClickHandler = new NodeClickHandler( $('#event-timeline')[0] );
+  var selectedNode;
 
   $.ajax({
     url: "data/test100_M_to_1.dot"
@@ -29,15 +30,20 @@ window.onload = function() {
           var end = ui.values[1];
           var selectedGraphs = graphs.slice(start, end);
 
-          updateTimeIntervalLabel(selectedGraphs);
-          render(selectedGraphs);
+          update(selectedGraphs);
         }
     });
 
-    updateTimeIntervalLabel(graphs);
-    render(graphs);
+    update(graphs);
 
   });
+
+  function update(selectedGraphs){
+    selectedNode = selectedNode || 'code_change';
+    updateTimeIntervalLabel(selectedGraphs);
+    render(selectedGraphs);
+    nodeClickHandler.handlerFunction(selectedNode);
+  }
 
   function updateTimeIntervalLabel(selectedGraphs){
     var firstGraph = selectedGraphs[0];
@@ -67,8 +73,6 @@ window.onload = function() {
 
     renderer(inner, g);
 
-
-
     // Resize the SVG element based on the contents.
     var svg = document.querySelector('#graph-svg');
     var bbox = svg.getBBox();
@@ -78,6 +82,7 @@ window.onload = function() {
     //Add click listener
     nodeClickHandler.setGraphs(graphs);
     inner.selectAll('g.node').on('click', function (nodeName){
+      selectedNode = nodeName;
       nodeClickHandler.handlerFunction(nodeName);
     });
   }
