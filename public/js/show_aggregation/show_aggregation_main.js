@@ -4,7 +4,7 @@ window.onload = function() {
   var aggregator = new Aggregator();
 
   var decorator = new AggregatedGraphDecorator();
-  var nodeClickHandler = new NodeClickHandler( $('#event-timeline')[0] );
+  var nodeClickHandler = new TimeLineHandler();
   var selectedNode;
 
   $.ajax({

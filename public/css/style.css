@@ -1,6 +1,7 @@
 svg {
   overflow: hidden;
   display: block;
+  padding: 5px;
 }
 
 #search-field{
@@ -56,4 +57,19 @@ g.node{
 
 #timeline1{
   margin-bottom: 50px;
+}
+
+/* time line line plot */
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+path.line { 
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
 }
