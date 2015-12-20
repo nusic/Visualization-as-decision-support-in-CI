@@ -18,7 +18,30 @@ window.onload = function() {
     var minVal = 0;
     var maxVal = graphs.length;
 
-    $("#slider-range").slider({
+    var mid = Math.ceil(maxVal/2);
+    var windowSize = maxVal;
+
+    $("#slider-time-window").slider({
+      value: mid,
+      min: minVal,
+      max: maxVal,
+      step: 1,
+      slide: function (e, ui) {
+          $('#timeline1').empty();
+          var mid = ui.value;
+          var values = $("#slider-time-range").slider('values');
+          var halfWidth = Math.ceil((values[1]-values[0])/2);
+          var start = Math.max(mid - halfWidth, minVal);
+          var end = Math.min(mid + halfWidth, maxVal);
+          $("#slider-time-range").slider('values', [start, end]);
+
+          var selectedGraphs = graphs.slice(start, end);
+          update(selectedGraphs);
+        },
+    });
+
+
+    $("#slider-time-range").slider({
         range: true,
         min: minVal,
         max: maxVal,
@@ -28,10 +51,13 @@ window.onload = function() {
           $('#timeline1').empty();
           var start = ui.values[0];
           var end = ui.values[1];
-          var selectedGraphs = graphs.slice(start, end);
+          var width = end - start;
+          var mid = start + Math.ceil(width / 2);
+          $("#slider-time-window").slider('value', mid);
 
+          var selectedGraphs = graphs.slice(start, end);
           update(selectedGraphs);
-        }
+        },
     });
 
     update(graphs);
