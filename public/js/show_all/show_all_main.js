@@ -7,7 +7,6 @@ window.onload = function() {
   var renderer = new dagreD3.render();
   var decorator = new Decorator();
   var devFlowExtractor = new DeveloperFlowExtractor(new Aggregator());
-  var edgeClickHandlers = [];
 
   var graphs = undefined;
 
@@ -98,8 +97,8 @@ window.onload = function() {
 
     // Add click listeners
     var showDeltaClickHandler = new ShowDeltaClickHandler(inner[0][0].parentNode);
-    showDeltaClickHandler.setGraph(g);
     showDeltaClickHandler.setGraphs(graphs);
+    showDeltaClickHandler.setGraph(g);
     inner.selectAll('g.edgePath.indirect').on('click', function (edge){
       showDeltaClickHandler.onEdgeClick(edge);
     });

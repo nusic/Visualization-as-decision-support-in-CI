@@ -25,10 +25,14 @@ Decorator.prototype.decorate = function(g){
 	g.graph().nodesep = 15;
 }
 
-Decorator.prototype.addTypeToLabel = function(node) {
+Decorator.prototype.getFormattedType = function(node) {
 	var typeStr = node.type.replace(/_/g,' '); //Replace '_' with ' '
 	typeStr = typeStr.charAt(0).toUpperCase() + typeStr.slice(1); //Capitalize first letter
-	node.label += typeStr;
+	return typeStr;
+};
+
+Decorator.prototype.addTypeToLabel = function(node) {
+	node.label += this.getFormattedType(node);;
 }
 
 Decorator.prototype.addTimeToLabel = function(node) {
@@ -55,6 +59,7 @@ Decorator.prototype.decorateNode = function(node) {
 
 	// applies to node types: patch_verification, code_review, build and test
 	this.addTypeToLabel(node);
+	node.formattedType = this.getFormattedType(node);
 	this.addTimeToLabel(node);
 	this.colorCodePassFail(node);
 
