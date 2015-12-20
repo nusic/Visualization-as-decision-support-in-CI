@@ -8,8 +8,8 @@ window.onload = function() {
   var selectedNode;
 
   $.ajax({
-    url: "data/test100_M_to_1.dot"
-    //url: "data/test2.dot"
+    //url: "data/test100_M_to_1.dot"
+    url: "data/test100templated.dot"
   }).done(function (data) {
     
     var $graphContainer = $('#graph-container');

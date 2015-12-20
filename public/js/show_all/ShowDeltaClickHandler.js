@@ -28,10 +28,11 @@ ShowDeltaClickHandler.prototype.onNodeClick = function(node) {
 	if(deltaGraphs.length){
 		var header = '<h4>Additional code changes included in ' + nodeData.formattedType + ':</h4>';
 		var deltaHtml = deltaGraphs.map(function (deltaGraph){
+			var codeChangeId = deltaGraph.nodes()[0];
 			var codeChange = deltaGraph.getCodeChange();
 			var date = new Date(Number(codeChange.time));
 			var dateStr = date.toDateAndTimeStr();
-			return dateStr + ' - <a href="#">' + codeChange.id + '</a>' + ' (' + codeChange.contributor + ')';
+			return dateStr + ' - <a href="#">' + codeChangeId + '</a>' + ' (' + codeChange.contributor + ')';
 		}).join('<br>');
 		this.$messageElement.html(header + deltaHtml);
 	}

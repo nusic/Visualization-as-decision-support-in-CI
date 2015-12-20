@@ -10,6 +10,7 @@ Decorator.prototype.decorate = function(g){
 
 	g.nodes().forEach(function (nodeId){
 		var node = g.node(nodeId);
+		node.id = nodeId;
 		thisDecorator.decorateNode(node);
 	});
 

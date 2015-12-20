@@ -30,7 +30,6 @@ Aggregator.prototype.unionOf = function(graphs, aggregationMethod){
 
 			nodeData.graphIndex = graphIndex;
 			nodeData.nodeIndex = j;
-			nodeData.id = nodeName;
 
 			// If aggregationMethod was provided as argument, use that,
 			// else use aggregation method based on node type
