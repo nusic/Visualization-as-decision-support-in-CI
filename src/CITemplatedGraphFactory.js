@@ -81,7 +81,6 @@ CITemplatedGraphFactory.prototype.createOne = function() {
 	// Remove all nodes that were reachable from last node, re-calculate dijkstra
 	// and keep doing this until the first node is reachable from the last node.
 	while(dijkstraFromLastNode[firstNode].distance === Infinity){
-		console.log('    dist from last to first is inf');
 		for (var i = 1; i < createdNodes.length; i++) {
 			var tmpNode = createdNodes[i];
 			if(dijkstraFromLastNode[tmpNode].distance !== Infinity){
@@ -93,7 +92,6 @@ CITemplatedGraphFactory.prototype.createOne = function() {
 		dijkstraFromLastNode = graphlib.alg.dijkstra(g, lastNode);
 	}
 
-	console.log('dist from last to first:' + dijkstraFromLastNode[firstNode].distance);
 	return g;
 };
 
