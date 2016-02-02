@@ -14,7 +14,7 @@ window.onload = function() {
 
   $.ajax({
     //url: "data/test100_M_to_1.dot"
-    url: "data/test100templated.dot"
+    url: "data/test100templatedNew.dot"
   }).done(function (data) {
     graphs = graphlibDot.readMany(data);
 
