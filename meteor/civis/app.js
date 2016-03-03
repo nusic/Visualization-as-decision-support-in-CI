@@ -167,15 +167,16 @@ if (Meteor.isClient) {
 
         var graphContainer = $('#graph-container');
         var aggregator = new Aggregator();
-        var aggfun = (graphs) => aggregator.unionOf(graphs); 
+        var aggfun = (graphs) => aggregator.unionOf(graphs);
+        var aggfun2 = (graphs) => aggregator.unionOf(graphs, 'stack');
         var decorator = new AggregatedGraphDecorator();
         var nodeClickHandler = new TimeLineHandler('#timeline1');
         var timelineOverview = new TimeLineHandler('#timeline-overview');
 
         function onGraphRendered(graph, inner, i, graphs){
           nodeClickHandler.setGraphs(graphs);
-           inner.selectAll('g.node').on('click', function (nodeName){
-            selectedNode = nodeName;
+           inner.selectAll('g.node').on('click', function (nodeType){
+            selectedType = nodeType;
             update(graphs);
           });
         }
@@ -187,13 +188,15 @@ if (Meteor.isClient) {
           dotGraphs: () => getDotGraphs('All')
         });
 
-        var selectedNode = 'code_change';
+        var selectedType = 'code_change';
 
         var self = this;
+        var graphCollection;
         this.subscribe('parsedGraphs', () => {
           $scope.graphs = self.dotGraphs.map( 
             (dotGraph) => graphlibDot.read(dotGraph.dot)
           );
+          graphCollection = new GraphCollection($scope.graphs);
           update($scope.graphs);
         });
 
@@ -218,9 +221,7 @@ if (Meteor.isClient) {
               var start = Math.max(mid - halfWidth, minVal);
               var end = Math.min(mid + halfWidth, maxVal);
               $("#slider-time-range").slider('values', [start, end]);
-
-              var selectedGraphs = $scope.graphs.slice(start, end);
-              update(selectedGraphs);
+              update(start, end);
             },
         });
 
@@ -235,24 +236,29 @@ if (Meteor.isClient) {
               $('#timeline1').empty();
               var start = ui.values[0];
               var end = ui.values[1];
-              var width = end - start;
-              var mid = start + Math.ceil(width / 2);
+              var mid = Math.ceil( (start + end)/2 );
               $("#slider-time-window").slider('value', mid);
-
-              var selectedGraphs = $scope.graphs.slice(start, end);
-              update(selectedGraphs);
+              update(start, end);
             },
         });
 
-        function update(selectedGraphs){
+        function update(start, end){
+          var graphs = graphCollection.graphsByType(selectedType);
+          var selectedGraphs = graphs.slice(start, end);
+
+          var nodeDatas = graphCollection.nodesDataByType(selectedType);
+          console.log(nodeDatas.map(function(n){
+            return n.time;
+          }));
+          
           timelineOverview.setGraphs($scope.graphs);
           nodeClickHandler.setGraphs(selectedGraphs);
 
           updateTimeIntervalLabel(selectedGraphs);
-          renderer.render(selectedGraphs, selectedNode);
+          renderer.render(selectedGraphs, selectedType);
 
-          timelineOverview.handlerFunction(selectedNode);
-          nodeClickHandler.handlerFunction(selectedNode);
+          timelineOverview.handlerFunction(selectedType);
+          nodeClickHandler.handlerFunction(selectedType);
         }
 
         function updateTimeIntervalLabel(selectedGraphs){
@@ -267,6 +273,7 @@ if (Meteor.isClient) {
         }
 
         function getStartTime(g){
+
           var codeChangeName = g.nodes()[0];
           var codeChangeData = g.node(codeChangeName);
           return new Date(Number(codeChangeData.time));

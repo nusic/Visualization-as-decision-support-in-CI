@@ -131,3 +131,15 @@ Aggregator.prototype.first_occurance = function(unionNodeMap, nodeData) {
 		unionNodeMap[nodeData.type].meta = 'first_occurance';
 	}
 };
+
+
+
+Aggregator.prototype.stack = function(unionNodeMap, nodeData){
+	if(unionNodeMap[nodeData.type] === undefined){
+		unionNodeMap[nodeData.type] = {
+			type: nodeData.type,
+			stack: [],
+		};
+	}
+	unionNodeMap[nodeData.type].stack.push(nodeData);
+}
