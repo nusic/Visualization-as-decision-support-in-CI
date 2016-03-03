@@ -172,7 +172,6 @@ if (Meteor.isClient) {
         var nodeClickHandler = new TimeLineHandler('#timeline1');
         var timelineOverview = new TimeLineHandler('#timeline-overview');
 
-
         function onGraphRendered(graph, inner, i, graphs){
           nodeClickHandler.setGraphs(graphs);
            inner.selectAll('g.node').on('click', function (nodeName){
@@ -204,7 +203,7 @@ if (Meteor.isClient) {
         var maxVal = this.dotGraphs.length;
         var mid = Math.ceil(maxVal/2);
         var windowSize = maxVal;
-        console.log(minVal, maxVal, mid, windowSize);
+        //console.log(minVal, maxVal, mid, windowSize);
 
         $("#slider-time-window").slider({
           value: mid,
@@ -252,7 +251,7 @@ if (Meteor.isClient) {
           updateTimeIntervalLabel(selectedGraphs);
           renderer.render(selectedGraphs, selectedNode);
 
-          timelineOverview.setGraphs(selectedNode);
+          timelineOverview.handlerFunction(selectedNode);
           nodeClickHandler.handlerFunction(selectedNode);
         }
 
