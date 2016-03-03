@@ -1,7 +1,7 @@
 var uniqueid = require('uniqueid');
 
 function CINodeFactory() {
-	this.time = new Date(2015, 9, 13, 13, 37, 0, 0);
+	this.time = new Date();
 	this.factoryMap = {};
 
 	this.initFactoryMap([

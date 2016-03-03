@@ -27,7 +27,7 @@ var manyToOneProbability = manyToOneProbabilityIndex ? parseFloat(process.argv[m
 var templateFileNameIndex = process.argv.indexOf('-template')+1;
 var templateFileName = templateFileNameIndex ? process.argv[templateFileNameIndex] : null;
 
-console.log('templateFileName: ' + templateFileName);
+//console.log('templateFileName: ' + templateFileName);
 
 // Init Graph factory
 var ciGraphFactory;
