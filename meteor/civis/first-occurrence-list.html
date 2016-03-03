@@ -1,0 +1,18 @@
+<h3>
+	<a ng-href="#/graphs/{{developer}}">Raw graphs</a> | 
+	First occurance |
+	<a ng-href="#/aggregation">Aggregation</a>
+</h3>
+<select id="select-developer">
+	
+</select>
+
+<p ng-hide="{{!developer || developer === 'All'}}">
+	Shows code changes and the first occurrence of each activity executed thereafter
+</p>
+<p class="red" ng-show="{{!developer || developer === 'All'}}">
+	Can not show first occurance for all developers. Please select a specific developer
+</p>
+<div id="graph-container">
+	
+</div>

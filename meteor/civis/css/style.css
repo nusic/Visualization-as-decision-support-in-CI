@@ -1,0 +1,88 @@
+svg {
+  overflow: hidden;
+  display: block;
+  padding: 5px;
+}
+
+#search-field{
+  margin: 20px;
+  margin-left: 0px;
+}
+
+.red{
+  color: red;
+}
+
+text {
+	font-weight: 300;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
+	font-size: 14px;
+}
+
+g.node{
+  cursor: pointer;
+}
+
+.node rect, .node ellipse, .node diamond, .node circle{
+  stroke: #333;
+  stroke-width: 2px;
+  fill: #fff;
+}
+
+
+.edgeLabel rect {
+  fill: #fff;
+}
+
+.edgePath {
+  stroke: #333;
+  stroke-width: 1.5px;
+}
+
+.edge-invisible{
+  stroke-width: 0px;
+  stroke: none; 
+  fill: none; 
+  stroke-dasharray: 5, 5;
+}
+
+#graph-text{
+	font-family: monospace;
+}
+
+.timelineSeries_passed{
+  fill: #f99;
+}
+
+.indirect{
+  cursor: pointer;
+  stroke: #00f; 
+  fill: #00f;
+  stroke-dasharray: 5, 5;
+}
+
+.edge-message{
+  position: relative;
+}
+
+#timeline1{
+  margin-bottom: 50px;
+}
+
+/* time line line plot */
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+path.line { 
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+
+

@@ -1,0 +1,14 @@
+<h3>
+	Raw graphs | 
+	<a ng-href="#/first_occurrence/{{developer}}">First occurance</a> |
+	<a ng-href="#/aggregation">Aggregation</a>
+</h3>
+
+<select id="select-developer" ng-model="developer">
+	<option ng-repeat="dev in developers">{{dev}}</option>
+</select>
+	
+<p>Shows code changes and the activities directly caused by those</p>
+<div id="graph-container">
+	
+</div>
